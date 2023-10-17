@@ -1,0 +1,19 @@
+= 
+
+[%header, cols="3, 5a"]
+|===
+^.>| 학습 일 
+^.>| 내용
+
+^.^| 2023.10.17
+|   
+    * link:https://github.com/ByunKi/nhn-academy-course-2/blob/main/quiz/Chapter_1.adoc[Unit 1 Quiz]
+    * link:https://github.com/ByunKi/nhn-academy-course-2/blob/main/quiz/Chapter_2.adoc[Unit 2 Quiz]
+    * link:https://github.com/ByunKi/nhn-academy-course-2/tree/main/exercise/unit_2[Unit 2 Exercise]
+
+^.^| 2023.10.18
+| 
+    * 
+
+
+|===
