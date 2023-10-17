@@ -1,0 +1,79 @@
+= Quiz on Chapter 1
+
+* Question 1
+** One of the components of a computer is its CPU. What is a CPU and what role does it play in a computer?
+
+* Central Processing Unit, 간단하게 CPU는 작성된 프로그램을 실행한다. (명령어에 사상된 동작을 실행하여 특정한 연산을 실시한다.)
+
+---
+
+* Question 2
+** Explain what is meant by an "asynchronous event." 
+** Give some examples.
+
+* 작업이 미리 정해진 대로 수행되는 것이 아닌, 아니라 예측되지 않은 시간과 기능을 요구하는 것을 비동기적인 이벤트라고 한다.
+* "Interrupt" CPU가 어떠한 동작이 지금 수행되는지 직접 알아보지 않고, CPU의 연산이 필요한 프로세스(혹은 스레드)가 신호를 CPU로 보내는 것이 일종의 비동기적 이벤트라고 할 수 있다.
+
+---
+
+* Question 3
+** What is the difference between a "compiler" and an "interpreter"?
+
+* `Compiler`는 미리 작성된 코드를 한 번에 특정한 언어(기계어)로 변환하지만 `Interpreter` 는 1개 명령어 단위마다 특정한 언어(기계어)로 해석한다.
+---
+
+* Question 4
+** Explain the difference between `high-level languages` and `machine language`.
+
+* 고급 언어는 프로그래머는 쉽게 이해할 수 있으나, 컴퓨터는 이해하기가 어려운 언어이다. 기계어는 기계(컴퓨터)가 이해할 수 있으나 사람이 이해하기에는 난해하다는 점에서 차이가 존재한다.
+
+---
+
+* Question 5
+** If you have the source code for a Java program, and you want to run that program, you will need both a `compiler` and an `interpreter`. 
+** What does the Java `compiler` do, and what does the Java `interpreter` do?
+
+* Java에서는 JVM으로 소스 코드를 바이트 코드로 변환시키는데, Java 컴파일러가 그러한 역할을 담당한다. +
+바이트 코드로 변환된 Java 코드를 실행하기 위해서는 Interpreter를 사용하여 이를 컴퓨터가 해석이 가능한 기계어로 변환하는 역할을 수행한다.
+
+---
+
+* Question 6
+** What is a subroutine?
+
+* Java에서 반복으로 실행이 가능한 1개 부분을 따로 분리한 것을 `subroutine` 이라고 한다. 다른 말로는 `Function` 으로 불리기도 한다.
+---
+
+* Question 7
+** Java is an object-oriented programming language. What is an object?
+
+* object는 객체 지향 프로그램에서의 모듈을 담당한다. 각 객체간의 통신으로 프로그램이 실행된다.
+* 객체는 그 자체가 데이터와 연산을 가지고있는 자급자족이 가능한 존재이다.
+
+---
+
+* Question 8
+** What is a variable? 
+** There are four different ideas associated with variables in Java. Try to mention all four aspects in your answer. 
+*** Hint: One of the aspects is the variable's name.
+
+* 변수의 이름은 메모리의 특정한 위치에 존재하는 값, 메모리에 위한 주소를 편하게 부를 수 있는 식별자이다.
+* 변수에 값을 초기화, 할당하여 데이터 보관할 수 있다.
+* 변수의 값이 어디에 존재하는지는 우리가 알 필요가 없다, 그 것은 컴파일러의 영역이다.
+* 변수에는 저장해야 하는 특정한 타입이 존재한다. 또한 특정한 타입에 일치하는 값을 넣어 주어야한다. 
+
+---
+
+* Question 9
+** Java is a "platform-independent language." What does this mean?
+
+* 각 CPU마다 처리할 수 있는 명령어 체계가 달라서 명령어 체계가 다른 프로그램을 실행할 수 없는 것이 플렛폼에 종속적인 언어이고 CPU의 명령어 체계에 상관없이 실행할 수 있는 프로그래밍 언어를 플렛폼에 독립적이다. 라고 한다.
+
+---
+
+* Question 10
+** What is the "Internet"? Give some examples of how it is used. 
+** What kind of services does it provide?
+
+* 인터넷은 전 세계 사람들의 수백만 대의 통신가능한 컴퓨터를 연결하는 네트워크 입니다.
+* 파일공유, 파일 읽기, 메일 전송 등을 수행 할 수 있습니다.
