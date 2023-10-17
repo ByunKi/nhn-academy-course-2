@@ -1,4 +1,8 @@
-= 
+= nhn-academy-course-2
+
+* nhn 아카데미 광주 4기, link:https://math.hws.edu/javanotes/index.html[선택과정 2]에 대한 요약정리를 업로드하는 공간
+
+== 학습 내용
 
 [%header, cols="3, 5a"]
 |===
