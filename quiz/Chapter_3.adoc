@@ -1,0 +1,330 @@
+= Quiz on Chapter 3
+
+* Question 1:
+** What is an algorithm?
+
+* 문제를 하기하기 위한 완전하고 명확한 단계들의 절차, 항상 유한한 시간안에 종료되어야 한다.
+
+---
+
+* Question 2:
+** Explain briefly what is meant by "pseudocode" and how is it useful in the development of algorithms.
+
+* 특정 프로그래밍 언어나 프로그램의 세부사항에 대한 지식 없이 프로그램의 구조를 모방할 수 있는 비공식적인 설계 지침
+
+---
+
+* Question 3:
+** What is a block statement? How are block statements used in Java programs?
+
+* 프로그램 내부에 존재하는 Statement를 1개의 단위로 그룹화 한 것, 단일 블록으로는 별 다른 기능을 제공하지 않지만,
+Java의 제어구조를 활용할 경우에는 해당 제어구조를 사용할 경우, 블록 단위로 Statement를 실행 시킬 수 있다.
+---
+
+* Question 4:
+** What is the main difference between a `while` loop and a `do..while` loop?
+
+* `while`은 조건을 반복을 시작하기 전에 검사하고 `do..while`은 우선 블록안에 있는 Statement 들을 실행 한 후,
+조건을 검사하는 점이 대표적인 차이점이다. 또한 `do..while` 에는 끝에 semicolon이 붙는 다는 점에서 차이가 존재한다.
+
+---
+
+* Question 5:
+** What does it mean to prime a loop?
+
+* 루프를 프라이밍한다는 것은 루프가 시작되기 전에 테스트가 의미가 있도록 설정하는 것입니다. 
+* 포함된 변수가 합리적인 값을 갖습니다.
+
+---
+
+* Question 6:
+** Explain what is meant by an animation and how a computer displays an animation.
+
+* 애니메이션은 어떠한 그림 혹은 사진에 조금씩 그리고 엄청 빠르게 변화를 주어, 인간의 눈에는 연속적으로 움직이는 것 처럼 보이게하는 일종의 착시현상을 이용한 기능이다.
+
+---
+
+* Question 7:
+** Write a for loop that will print out all the multiples of 3 from 3 to 36. `that is: 3 6 9 12 15 18 21 24 27 30 33 36`
+
+[source, java]
+----
+for (int i = 3; i <= 36; i++) {
+    if (i % 3 == 0) {
+        System.out.print(i + " ");
+    }
+}
+----
+
+---
+
+* Question 8:
+** Fill in the following `main()` routine so that it will ask the user to enter an integer, read the user's response, and tell the user whether the number entered is even or odd. 
+
+[source, java]
+----
+public static void main(String[] args) {
+ 
+         // Fill in the body of this subroutine!
+ 
+}
+----
+
+[source, java]
+----
+package quiz.unit_3;
+
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+public class quiz8 {
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            int number = scanner.nextInt();
+            System.out.println(number % 2 == 0 ? "Even" : "Odd");
+        } catch (NoSuchElementException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+----
+
+---
+
+* Question 9:
+** Write a code segment that will print out two different random integers selected from the range 1 to 10. All possible outputs should have the same probability. 
+** Hint: You can easily select two random numbers, but you have to account for the fact that the two numbers that you pick might be the same.
+
+[source, java]
+----
+package quiz.unit_3;
+
+public class quiz9 {
+    public static void main(String[] args) {
+        int numberA = (int) (Math.random() * 10) + 1;
+        int numberB = (int) (Math.random() * 10) + 1;
+
+        System.out.println(numberA + " " + numberB);
+    }
+}
+----
+
+---
+
+* Question 10:
+** Suppose that `s1` and `s2` are variables of type `String`, whose values are expected to be string representations of values of type `int`. 
+** Write a code segment that will compute and print the integer sum of those values, or will print an error message if the values cannot successfully be converted into integers. (Use a try..catch statement.)
+
+[source, java]
+----
+package quiz.unit_3;
+
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+public class quiz10 {
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            String s1 = scanner.nextLine();
+            String s2 = scanner.nextLine();
+
+            int s1Num = Integer.parseInt(s1);
+            int s2Num = Integer.parseInt(s2);
+
+            System.out.println(s1Num + s2Num);
+        } catch (NoSuchElementException e) {
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("String을 int로 변경할 수 없습니다.");
+        }
+    }
+}
+----
+
+---
+
+* Question 11:
+** Show the exact output that would be produced by the following `main()` routine:
+
+[source, java]
+----
+public static void main(String[] args) {
+    int N;
+    N = 1;
+    while (N <= 32) {
+       N = 2 * N;
+       System.out.println(N);   
+    }
+}
+----
+
+[source, java]
+----
+package quiz.unit_3;
+
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+public class quiz11 {
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            int number = 1;
+
+            while (number <= 32) {
+                number = number * 2;
+                System.out.println(number);
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println(e.getMessage());
+        }quiz
+    }
+}
+----
+
+    2
+    4
+    8
+    16
+    32
+    64
+
+---
+
+* Question 12:
+** Show the exact output produced by the following `main()` routine:
+
+[source, java]
+----
+public static void main(String[] args) {
+   int x,y;
+   x = 5;
+   y = 1;
+   while (x > 0) {
+      x = x - 1;
+      y = y * x;
+      System.out.println(y);
+   }
+}
+----
+
+[source, java]
+----
+package quiz.unit_3;
+
+public class quiz12 {
+    public static void main(String[] args) {
+        int x = 5;
+        int y = 1;
+
+        while (x > 0) {
+            x = x - 1;
+            y = y * x;
+            System.out.println(y);
+        }
+    }
+}
+----
+
+    4
+    12
+    24
+    24
+    0
+
+---
+
+* Question 13:
+** What output is produced by the following program segment? Why? 
+** Recall that name.charAt(i) is the i-th character in the string, name.
+
+[source, java]
+----
+String name;
+int i;
+boolean startWord;
+
+name = "Richard M. Nixon";
+startWord = true;
+for (i = 0; i < name.length(); i++) {
+   if (startWord)
+      System.out.println(name.charAt(i));
+   if (name.charAt(i) == ' ')
+      startWord = true;
+   else
+      startWord = false;
+}
+----
+
+    R
+    M
+    N
+
+---
+
+* Question 14:
+** Suppose that numbers is an array of type `int[]`. 
+** Write a code segment that will count and output the number of times that the number 42 occurs in the array.
+
+[source, java]
+----
+package quiz.unit_3;
+
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+public class quiz14 {
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            int[] numbers = new int[scanner.nextInt()];
+            for (int i = 0; i < numbers.length; i++) {
+                numbers[i] = (int) (Math.random() * 50) + 40;
+            }
+
+            int count = 0;
+            for (int number : numbers) {
+                if (number == 42) {
+                    count++;
+                }
+            }
+
+            System.out.println(count);
+        } catch (NoSuchElementException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+----
+
+---
+
+* Question 15:
+** Define the `range` of an array of numbers to be the maximum value in the array minus the minimum value. Suppose that raceTimes is an array of type `double[]`. 
+** Write a code segment that will find and print the range of raceTimes.
+
+[source, java]
+----
+package quiz.unit_3;
+
+public class quiz15 {
+    public static void main(String[] args) {
+        double[] raceTimes = new double[100];
+        for (int i = 0; i < raceTimes.length; i++) {
+            raceTimes[i] = Math.random() * 100 + 1d;
+        }
+
+        double max = Double.MIN_VALUE;
+        double min = Double.MAX_VALUE;
+        for (double raceTime : raceTimes) {
+            if (raceTime > max) {
+                max = raceTime;
+            }
+
+            if (raceTime < min) {
+                min = raceTime;
+            }
+        }
+
+        System.out.println(min + " " + max);
+    }
+}
+----
