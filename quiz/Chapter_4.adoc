@@ -1,0 +1,289 @@
+= Quiz on Chapter 4
+
+* Question 1:
+** A "black box" has an interface and an implementation. Explain what is meant by the terms interface and implementation.
+
+* interface: 서로 다른 시스템간의 연결, 시스템의 기능과 갖추어야할 조건들 또한 인터페이스 내부에 포함 되어있다.
+* implements: 특정 클래스에 인터페이스의 내부구조를 정의하여 인터페이스가 합법적으로 작동하게끔 하는 것을 의미한다.
+
+---
+
+* Question 2:
+** A subroutine is said to have a contract. What is meant by the contract of a subroutine? When you want to use a subroutine, why is it important to understand its contract? The contract has both "syntactic" and "semantic" aspects. What is the syntactic aspect? What is the semantic aspect?
+
+* 서브루틴의 계약은 인터페이스를 의미한다. 인터페이스의 Syntax 측면에는 인터페이스는 사용자와 시스템이 서로 상호작용할 수있도록 하는 것을 의미하고 Semantic 측면에는 인터페이스를 구현하는 클래스에는 시스템의 기능과 시스템이 갖추어야할 조건들을 준수하는 것을 의미한다.
+
+---
+
+* Question 3:
+** Briefly explain how subroutines can be useful in the top-down design of programs.
+
+* 하향식 설계에서 분리가 가능한 부분들을 서브루틴으로 나누어서 프로그램의 복잡성을 낮출 수 있다. 프로그램에서 값을 입력을 받을 때 입력조건을 확인하는데 부분적으로 입력조건을 확인하여 전체적으로 안정적인 프로그램을 설계할 수 있다.
+
+---
+
+* Question 4:
+** Discuss the concept of parameters. What are parameters for? What is the difference between formal parameters and actual parameters?
+
+* 외부의 데이터를 서브루틴의 내부에서 초기값으로 사용하는 지역 변수
+* Formal parameter: 서브루틴을 정의할 때 사용하는 올바른 타입이나 형식을 사용할 수 있게하는 형식적인 식별자 역할을 수행한다.
+* Actual parameter: 서브루틴을 호출할 때, 전달되는 값으로 서브루틴 내부에서 실질적인 초기값을 저장하여 사용하는 지역 변수
+
+---
+
+* Question 5:
+** Give two different reasons for using named constants (declared with the final modifier).
+
+* 상수에는 의미 있는 이름이 있어 프로그램을 더 쉽게 읽을 수 있습니다
+* 필요한 경우 상수 값을 수정하기 쉽기 때문입니다.
+* 프로그램이 실행되면서 값이 변경되는 것을 방지하기 때문에 사용한다.
+
+---
+
+* Question 6:
+** What is an API? Give an example.
+
+* 이는 누군가가 작성한 서브루틴의 "도구 상자"에 대한 인터페이스입니다. 
+* 어떤 루틴을 사용할 수 있는지, 어떻게 호출하는지, 무엇을 하는지는 알려주지만, 서브루틴이 어떻게 구현되는지는 알려주지 않습니다. 
+* java.lang 및 java.util 과 같은 패키지에서 사용할 수 있는 모든 클래스의 모든 서브루틴 인터페이스를 설명하는 표준 Java API가 그 예입니다 .
+
+---
+
+* Question 7:
+** What might the following expression mean in a program?
+
+[source, java]
+----
+(a,b) -> a*a + b*b + 1
+----
+
+* `a`와 `b`를 제곱하여 1을 더하는 기능을 의미한다.
+
+---
+
+* Question 8:
+** Suppose that `SupplyInt` is a functional interface that defines the method public int get(). Write a lambda expression of type `SupplyInt` that gets a random integer in the range 1 to 6 inclusive. Write another lambda expression of type `SupplyInt` that gets an `int` by asking the user to enter an integer and then returning the user's response.
+
+[source, java]
+----
+package quiz.unit_4;
+
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+public class quiz8 {
+    public static void main(String[] args) {
+        try {
+            SupplyInt test = (() -> (int) (Math.random() * 6) + 1);
+            System.out.println("임의의 수: " + test.get());
+
+            SupplyInt tes2 = (() -> new Scanner(System.in).nextInt());
+            System.out.println(tes2.get());
+        } catch (NoSuchElementException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+@FunctionalInterface
+interface SupplyInt {
+    int get();
+}
+----
+
+---
+
+* Question 9:
+** Write a subroutine named "stars" that will output a line of stars to standard output. (A star is the character "*".) The number of stars should be given as a parameter to the subroutine. 
+** Use a for loop. For example, the command "stars(20)" would output
+
+    ********************
+
+[source, java]
+----
+package quiz.unit_4;
+
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+public class quiz9 {
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            int input = scanner.nextInt();
+            stars(input);
+        } catch (NoSuchElementException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void stars(int number) {
+        for (int i = 0; i < number; i++) {
+            System.out.print("*");
+        }
+        System.out.println();
+    }
+}
+----
+
+---
+
+* Question 10:
+** Write a `main()` routine that uses the subroutine that you wrote for `Question 9` to output 10 lines of stars with 1 star in the first line, 2 stars in the second line, and so on, as shown below.
+
+    *
+    **
+    ***
+    ****
+    *****
+    ******
+    *******
+    ********
+    *********
+    **********
+
+[source, java]
+----
+package quiz.unit_4;
+
+public class quiz10 {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 10; i++) {
+            quiz9.stars(i);
+        }
+    }
+}
+----
+
+---
+
+* Question 11:
+** Write a function named countChars that has a `String` and a `char` as parameters. The function should count the number of times the character occurs in the string, and it should return the result as the value of the function.
+
+[source, java]
+----
+package quiz.unit_4;
+
+public class quiz11 {
+    public static void main(String[] args) {
+        System.out.println(countChars("Hello World!", 'l'));
+    }
+
+    private static int countChars(String str, char ch) {
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == ch) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+}
+----
+
+---
+
+* Question 12:
+** Write a subroutine with three parameters of type int. 
+** The subroutine should determine which of its parameters is smallest. 
+** The value of the smallest parameter should be returned as the value of the subroutine.
+
+[source, java]
+----
+package quiz.unit_4;
+
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+public class quiz12 {
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            int[] inputs = new int[3];
+            for (int i = 0; i < inputs.length; i++) {
+                inputs[i] = scanner.nextInt();
+            }
+
+            System.out.println(min(inputs[0], inputs[1], inputs[2]));
+        } catch (NoSuchElementException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static int min(int i, int j, int k) {
+        return Math.min(i, Math.min(j, k));
+    }
+}
+----
+
+---
+
+* Question 13:
+** Write a function that finds the average of the first N elements of an array of type `double`.
+** The array and N are parameters to the subroutine.
+
+[source, java]
+----
+package quiz.unit_4;
+
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+public class quiz13 {
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            int length = scanner.nextInt();
+            double[] array = new double[length];
+            for (int i = 0; i < array.length; i++) {
+                array[i] = scanner.nextDouble();
+            }
+
+            System.out.println(average(array));
+        } catch (NoSuchElementException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static double sum(double[] array) {
+        double result = 0;
+        for (int i = 0; i < array.length; i++) {
+            result += array[i];
+        }
+
+        return result;
+    }
+
+    private static double average(double[] array) {
+        return sum(array) / array.length;
+    }
+}
+----
+
+---
+
+* Question 14:
+** Explain the purpose of the following function, and explain how it works:
+
+[source, java]
+----
+static int[] stripZeros( int[] list ) {
+    int count = 0;
+    for (int i = 0; i < list.length; i++) {
+        if ( list[i] != 0 )
+            count++;
+    }
+    int[] newList;
+    newList = new int[count];
+    int j = 0;
+    for (int i = 0; i < list.length; i++) {
+        if ( list[i] != 0 ) {
+            newList[j] = list[i];
+            j++;
+        }
+    }
+    return newList;
+}
+----
+
+* 목적: 기존 배열에 존재하는 0을 제거한 새로운 배열을 만들기 위해서 정의한 서브루틴
+* 설명: 
+** parameter로 전달받은 배열을 순회하여 0이 아닌 배열 요소의 개수를 구하고, 새로운 배열을 만들어 기존 배열에 존재하는 0이 아닌 요소를 순차적으로 초기화하는 서브루틴이다.
