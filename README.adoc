@@ -20,6 +20,9 @@
     * link:https://github.com/ByunKi/nhn-academy-course-2/blob/main/quiz/Chapter_3.adoc[Unit 3 Quiz]
     * link:https://github.com/ByunKi/nhn-academy-course-2/tree/main/exercise/unit_3[Unit 3 Exercise]
     
-
+^.^| 2023.10.20
+| 
+    * link:https://github.com/ByunKi/nhn-academy-course-2/blob/main/quiz/Chapter_4.adoc[Unit 4 Quiz]
+    * link:https://github.com/ByunKi/nhn-academy-course-2/tree/main/exercise/unit_4[Unit 4 Exercise]
 
 |===
