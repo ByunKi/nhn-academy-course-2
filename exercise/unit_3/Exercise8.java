@@ -32,7 +32,7 @@ public class Exercise8 extends Application {
     public void start(Stage stage) {
         int width = 400;
         int height = 400;
-        Canvas canvas = new Canvas(width,height);
+        Canvas canvas = new Canvas(width, height);
         drawPicture(canvas.getGraphicsContext2D(), width, height);
         BorderPane root = new BorderPane(canvas);
         root.setStyle("-fx-border-width: 4px; -fx-border-color: #444");
@@ -42,7 +42,6 @@ public class Exercise8 extends Application {
         stage.show();
         stage.setResizable(false);
     }
-
 
     public static void main(String[] args) {
         launch();

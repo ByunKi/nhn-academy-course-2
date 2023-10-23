@@ -18,32 +18,35 @@ public class MosaicCanvas extends Canvas {
 
     private Color[][] grid;
 
-    private GraphicsContext g; // The graphics context for drawing on this canvas.
+    private GraphicsContext g; // The graphics context for drawing on this
+    canvas.
 
-    public MosaicCanvas() {
-        this(42, 42);
-    }
+public MosaicCanvas() {
+this(42, 42);
+}
 
     public MosaicCanvas(int rows, int columns) {
         this(rows, columns, 16, 16);
     }
 
-    public MosaicCanvas(int rows, int columns, int preferredBlockWidth, int preferredBlockHeight) {
+public MosaicCanvas(int rows, int columns, int preferredBlockWidth, int
+preferredBlockHeight) {
 
-        this.rows = rows;
-        this.columns = columns;
-        if (rows <= 0 || columns <= 0)
-            throw new IllegalArgumentException("Rows and Columns must be greater than zero.");
-        preferredBlockHeight = Math.max(preferredBlockHeight, 5);
-        preferredBlockWidth = Math.max(preferredBlockWidth, 5);
-        grid = new Color[rows][columns];
-        defaultColor = Color.BLACK;
-        groutingColor = Color.GRAY;
-        alwaysDrawGrouting = false;
-        setWidth(preferredBlockWidth * columns);
-        setHeight(preferredBlockHeight * rows);
-        g = getGraphicsContext2D();
-    }
+this.rows = rows;
+this.columns = columns;
+if (rows <= 0 || columns <= 0)
+throw new IllegalArgumentException("Rows and Columns must be greater than
+zero.");
+preferredBlockHeight = Math.max(preferredBlockHeight, 5);
+preferredBlockWidth = Math.max(preferredBlockWidth, 5);
+grid = new Color[rows][columns];
+defaultColor = Color.BLACK;
+groutingColor = Color.GRAY;
+alwaysDrawGrouting = false;
+setWidth(preferredBlockWidth * columns);
+setHeight(preferredBlockHeight * rows);
+g = getGraphicsContext2D();
+}
 
     public void setDefaultColor(Color c) {
         if (c == null)

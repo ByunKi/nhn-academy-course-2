@@ -21,8 +21,9 @@ public class Exercise9 extends Application {
         }
 
         int startVerticalPosition = 0;
-        int[] frames = {800, 400, 200};
-        Color[] colors = {Color.RED, Color.LIGHTGREEN, Color.BLUE, Color.LIGHTCYAN, Color.MAGENTA, Color.YELLOW};
+        int[] frames = { 800, 400, 200 };
+        Color[] colors = { Color.RED, Color.LIGHTGREEN, Color.BLUE, Color.LIGHTCYAN,
+                Color.MAGENTA, Color.YELLOW };
 
         for (int i = 0; i < frames.length; i++, startVerticalPosition += 100) {
             int cyclicFrameNumber = frameNumber % frames[i];
@@ -31,7 +32,7 @@ public class Exercise9 extends Application {
         }
 
         for (int i = 0; i < frames.length; i++, startVerticalPosition += 100) {
-            int oscilationFrameNumber = frameNumber % (2  * frames[i]);
+            int oscilationFrameNumber = frameNumber % (2 * frames[i]);
             if (oscilationFrameNumber > frames[i]) {
                 oscilationFrameNumber = 2 * frames[i] - oscilationFrameNumber;
             }
@@ -44,7 +45,7 @@ public class Exercise9 extends Application {
     public void start(Stage stage) {
         int width = 800;
         int height = 600;
-        Canvas canvas = new Canvas(width,height);
+        Canvas canvas = new Canvas(width, height);
         drawFrame(canvas.getGraphicsContext2D(), 0, 0, width, height);
         BorderPane root = new BorderPane(canvas);
         root.setStyle("-fx-border-width: 4px; -fx-border-color: #444");
@@ -57,14 +58,15 @@ public class Exercise9 extends Application {
             private int frameNum;
             private long startTime = -1;
             private long previousTime;
+
             public void handle(long now) {
                 if (startTime < 0) {
                     startTime = previousTime = now;
                     drawFrame(canvas.getGraphicsContext2D(), 0, 0, width, height);
-                }
-                else if (now - previousTime > 0.95e9/60) {
+                } else if (now - previousTime > 0.95e9 / 60) {
                     frameNum++;
-                    drawFrame(canvas.getGraphicsContext2D(), frameNum, (now-startTime)/1e9, width, height);
+                    drawFrame(canvas.getGraphicsContext2D(), frameNum, (now - startTime) / 1e9,
+                            width, height);
                     previousTime = now;
                 }
             }

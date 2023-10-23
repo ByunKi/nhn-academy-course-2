@@ -1,1 +1,187 @@
 = Quiz on Chapter 5
+
+* Question 1:
+** Object-oriented programming uses classes and objects. What are classes and what are objects? What is the relationship between classes and objects?
+
+* Class: OOP에서는 일종의 타입으로 규정될 수 있으며, 실제 세계의 개체에 대한 추상화 과정을 통해서 프로그램 내부에서 동작하는 것들에 대한 상세 혹은 설계이다.
+* Object: 실제세계의 대표적인 정보와 기능을 수행하는 동작을 가지며, 서로 상호작용을 할 수 있는 개체이다. OOP 내부에서는 클래스와 동일한 내부 구조를 가지지만, 실제로 기능을 수행하며 다른 객체와 상호작용을 수행할 수 있는 일종의 모듈로 볼 수 있다.
+
+---
+
+* Question 2:
+** Explain carefully what null means in Java, and why this special value is necessary.
+
+* Java에서 객체가 어떠한 메모리 참조도 하지않는 객체는 널 포인터 값을 가진다고 한다. 이러한 객체를 사용하면 컴파일은 정상적으로 수행되지만, 실제 프로그램이 작동하면서 오류가 발생한다. 널은 어떠한 메모리 주소를 나타내는 것이 아닌 메모리 참조가 없는 값으로 사용된다. 
+
+---
+
+* Question 3:
+** What is a constructor? What is the purpose of a constructor in a class?
+
+* 객체를 생성할 때, 가장 먼저 호출되는 객체의 메서드 이다. 생성자는 객체의 초기값을 초기화하기 위해서 사용한다.
+
+---
+
+* Question 4:
+** Suppose that Kumquat is the name of a class and that fruit is a variable of type Kumquat. What is the meaning of the statement "fruit = new Kumquat();"? That is, what does the computer do when it executes this statement? (Try to give a complete answer. The computer does several things.)
+
+* 해당 변수에, 해당 클래스의 객체가 생성된 메모리의 참조 위치를 저장(할당)한다.
+
+1. 해당 변수의 타입의 크기에 맞는 메모리 공간을 할당하고 메모리에 해당 객체를 넣는다.
+2. 사용된 객체의 인스턴스 변수 등을 초기화 한다.
+3. 객체에 대한 참조 연산이 생성자의 호출로 변환되어 사용된다.
+
+---
+
+* Question 5:
+** What is meant by the terms instance variable and instance method?
+
+* 인스턴스 변수와 메서드는 클래스에서 정의된 객체에 종속된 정보들이다. 특히 변수에 초기화되는 값은 생성되는 객체마다 다르며 메서드 또한 객체의 타입마다 달라진다. 
+
+---
+
+* Question 6:
+** Explain what is meant by the terms subclass and superclass.
+
+* Super Class: 하위 타입의 추가된 기능을 원래 가지고 있었던 클래스, 재사용성을 극대화 하기위해서 사전에 공통적이고 기초적인 부분을 미리 가지고 있다가 하위타입에 동일한 변수 혹은 메서드를 사용할 수 있게 한다.
+* Sub Class: 슈퍼 타입의 private 접근지정자가 붙은 변수나 메서드를 제외한 모든 변수들을 사용할 수 있으며 새로이 추가한 메서드나 변수으로 확장이 가능한 타입, 재사용성을 최대화하기 위해서 사용한다.
+---
+
+* Question 7:
+** Modify the following class so that the two instance variables are private and there is a getter method and a setter method for each instance variable:
+
+[source, java]
+----
+public class Player {
+   String name;
+   int score;
+}
+----
+
+[source, java]
+----
+package quiz.unit_5;
+
+public class Quiz7 {
+    public static void main(String[] args) {
+        Player player = new Player("이름", 0);
+    }
+}
+
+class Player {
+    private String name;
+    private int score;
+
+    public Player(String name, int score) {
+        this.name = name;
+        this.score = score;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+}
+----
+
+
+
+---
+
+* Question 8:
+** Explain why the class `Player` that is defined in the previous question has an instance method named `toString()`, even though no definition of this method appears in the definition of the class.
+
+* `Player` 클래스에는 해당 메서드가 정의되어 있지 않지만, 모든 클래스의 조상인 Object 타입에는 `toString()` 메서드가 정의 되어있어 `toString()` 메서드를 실행할 수 있으나, 메서드가 재정의 되어있지 않아, Object 타입의 `toString()`이 호출된다.
+
+---
+
+* Question 9:
+** Explain the term polymorphism.
+
+* 상속관계의 경우에 두 메서드의 타입 시그니처가 동일한데, 실제로 구현 되어있는 객체의 타입이 다르기 때문에 구현되어 있는 객체의 메서드 정의를 따라서 다른 기능이 수행되는 것을 말한다. 즉, 메소드에 의해 수행되는 작업이 런타임에 메소드가 적용되는 객체의 실제 유형에 따라 달라지면 메소드는 다형성을 갖추고 있다고 할 수 있다.
+
+---
+
+* Question 10:
+** Java uses `garbage collection` for memory management. Explain what is meant here by `garbage collection`. What is the alternative to `garbage collection`?
+
+* 사용자나 프로그래머가 더이상 사용하지 않는 Heap내 메모리를 Garbage라고 한다. Java에서는 이러한 Garbage를 자동으로 반환해주는 기능이 존재하는데 이걸 Garbage Collection이라 한다. 해당 기능이 존재하지 않는 C++의 경우에는 프로그래머가 일일이 사용되는 동적 메모리나 시스템 리소스 등을 반환해야하는 반면 Java에서는 해당 반환을 수행할 필요가 없어 프로그래머의 역할을 어느정도 분담해준다.
+
+---
+
+* Question 11:
+** What is an abstract class, and how can you recognize an abstract class in Java?
+
+* 추상 클래스는 클래스를 생성할 때, 공통적으로 가지고 있는 메서드나 변수를 사전에 선언하여 구현에 대한 추상화를 실시한다.
+Java에서 추상 클래스를 사용할 때, `abstrat` 키워드를 사용해서 메서드나 클래스를 추상 메서드 혹은 추상 클래스로 사용할 수 있다.
+
+---
+
+* Question 12:
+** What is this?
+
+* `this`는 Java에서 클래스 내부를 정의할 때 주로 사용한다. 이 키워드는 객체 자신을 지시 혹은 지칭하는데 사용된다.
+인스턴스 변수에서 사용하면 해당 객체를 의미하고, 생성자 쪽에서 사용하면, 클래스 자신의 생성자를 지칭한다.
+
+---
+
+* Question 13:
+** For this problem, you should write a very simple but complete class. The class represents a counter that counts 0, 1, 2, 3, 4, .... The name of the class should be Counter. It has one private instance variable representing the value of the counter. 
+** It has two instance methods: `increment()` adds one to the counter value, and `getValue()` returns the current counter value. Write a complete definition for the class, Counter.
+
+---
+
+* Question 14:
+** This problem uses the Counter class from the previous question. The following program segment is meant to simulate tossing a coin 100 times. It should use two Counter objects, `headCount` and `tailCount`, to count the number of heads and the number of tails. Fill in the blanks so that it will do so:
+
+    Counter headCount, tailCount;
+    tailCount = new Counter();
+    headCount = new Counter();
+    for ( int flip = 0;  flip < 100;  flip++ ) {
+       if (Math.random() < 0.5)    // There's a 50/50 chance that this is true.
+    
+           ______________________ ;   // Count a "head".
+
+       else
+    
+           ______________________ ;   // Count a "tail".
+    }
+
+    System.out.println("There were " + ___________________ + " heads.");
+
+    System.out.println("There were " + ___________________ + " tails.");
+
+
+[source, java]
+----
+package quiz.unit_5;
+
+public class Quiz14 {
+    public static void main(String[] args) {
+        Counter headCount, tailCount;
+        tailCount = new Counter();
+        headCount = new Counter();
+        for (int flip = 0; flip < 100; flip++) {
+            if (Math.random() < 0.5) {
+                headCount.increment(); // Count a "head".
+            } else {
+                tailCount.increment(); // Count a "tail".
+            }
+        }
+
+        System.out.println("There were " + headCount.getValue() + " heads.");
+        System.out.println("There were " + tailCount.getValue() + " tails.");
+    }
+}
+----
+
+---
+
+* Question 15:
+** Explain why it can never make sense to test `if (obj.equals(null))`.
+
+* null 은 해당 객체가 어떠한 메모리 참조도 가지고 있지 않다는 말을 의미한다. 특정한 메모리 주소의 위치가 저장되어 있지 않아서 어떠한 객체가 존재하지 않는데, 특정한 값하고 비교를 하는 것 자체가 이상하다고 생각된다. 해당 객체 타입의 변수가 null 포인터 값인지 확인하고 싶다면, 해당 객체가 참조하고 있는 값이 null인지 확인하는 것을 권장한다.
