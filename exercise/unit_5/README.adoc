@@ -1,0 +1,120 @@
+= Programming Exercises for Chapter 5
+
+* Exercise 5.1:
+** Write another version of the `PairOfDice` class in which the instance variables die1 and die2 are private. Your class will need `getter` methods that can be used to find out the values of `die1` and `die2`.
+** Test your class with a short program that counts how many times a pair of dice is rolled, before the total of the two dice is equal to two.
+
+---
+
+* Exercise 5.2:
+** A common programming task is computing statistics of a set of numbers. (A statistic is a number that summarizes some property of a set of data.) Common statistics include the mean (also known as the average) and the standard deviation (which tells how spread out the data are from the mean). I have written a little class called `StatCalc` that can be used to compute these statistics, as well as the sum of the items in the dataset and the number of items in the dataset. You can read the source code for this class in the file `StatCalc.java`. If calc is a variable of type `StatCalc`, then the following instance methods are available
+
+*** calc.enter(item)  
+**** where item is a number, adds the item to the dataset.
+*** calc.getCount()  
+****is a function that returns the number of items that have been added to the dataset.
+*** calc.getSum()  
+**** is a function that returns the sum of all the items that have been added to the dataset.
+*** calc.getMean()
+**** is a function that returns the average of all the items.
+*** calc.getStandardDeviation()
+**** is a function that returns the standard deviation of the items.
+
+** Typically, all the data are added one after the other by calling the `enter()` method over and over, as the data become available. After all the data have been entered, any of the other methods can be called to get statistical information about the data. The methods `getMean()` and `getStandardDeviation()` should only be called if the number of items is greater than zero.
+
+** Modify the current source code, StatCalc.java, to add instance methods `getMax()` and `getMin().` The `getMax()` method should return the largest of all the items that have been added to the dataset, and `getMin()` should return the smallest. You will need to add two new instance variables to keep track of the largest and smallest items that have been seen so far.
+
+** Test your new class by using it in a program to compute statistics for a set of non-zero numbers entered by the user. Start by creating an object of type StatCalc
+
+[source, java]
+----
+StatCalc  calc;   // Object to be used to process the data.
+calc = new StatCalc();
+----
+
+** Read numbers from the user and add them to the dataset. Use 0 as a sentinel value (that is, stop reading numbers when the user enters 0). After all the user's non-zero numbers have been entered, print out each of the six statistics that are available from calc.
+
+---
+
+* Exercise 5.3:
+** The program in `Exercise 4.4` performs the experiment of counting how many times a pair of dice is rolled before a given total comes up. It repeats this experiment 10000 times and then reports the average number of rolls. It does this whole process for each possible total.
+** Use a PairOfDice object to represent the dice. Use a `StatCalc` object to compute the statistics.
+
+---
+
+* Exercise 5.4:
+** Write a program to test the `BlackjackHand` class. You should create a `BlackjackHand` object and a `Deck` object. Pick a random number between 2 and 6. Deal that many cards from the deck and add them to the hand. Print out all the cards in the hand, and then print out the value computed for the hand by `getBlackjackValue()`. Repeat this as long as the user wants to continue.
+
+---
+
+* Exercise 5.5:
+** Write a program that lets the user play Blackjack. The game will be a simplified version of Blackjack as it is played in a casino. The computer will act as the dealer. As in the previous exercise, your program will need the classes defined in `Card.java`, `Deck.java`, `Hand.java`, and `BlackjackHand.java`.
+
+** You should first write a subroutine in which the user plays one game. The subroutine should return a boolean value to indicate whether the user wins the game or not. Return true if the user wins, false if the dealer wins. The program needs an object of class `Deck` and two objects of type `BlackjackHand`, one for the dealer and one for the user. The general object in `Blackjack` is to get a hand of cards whose value is as close to 21 as possible, without going over.
+
+
+*** First, two cards are dealt into each player's hand. If the dealer's hand has a value of 21 at this point, then the dealer wins. Otherwise, if the user has 21, then the user wins. (This is called a "Blackjack".) Note that the dealer wins on a tie, so if both players have Blackjack, then the dealer wins.
+
+*** Now, if the game has not ended, the user gets a chance to add some cards to her hand. In this phase, the user sees her own cards and sees one of the dealer's two cards. (In a casino, the dealer deals himself one card face up and one card face down. All the user's cards are dealt face up.) The user makes a decision whether to "Hit", which means to add another card to her hand, or to "Stand", which means to stop taking cards.
+
+*** If the user Hits, there is a possibility that the user will go over 21. In that case, the game is over and the user loses. If not, then the process continues. The user gets to decide again whether to Hit or Stand.
+
+*** If the user Stands, the game will end, but first the dealer gets a chance to draw cards. The dealer only follows rules, without any choice. The rule is that as long as the value of the dealer's hand is less than or equal to 16, the dealer Hits (that is, takes another card). The user should see all the dealer's cards at this point. Now, the winner can be determined: If the dealer has gone over 21, the user wins. Otherwise, if the dealer's total is greater than or equal to the user's total, then the dealer wins. Otherwise, the user wins.
+
+---
+
+* Exercise 5.6:
+** `Exercise 4.8` asked you to write a program that administers a 10-question addition quiz. Rewrite that program so that it uses the following class to represent addition questions
+
+[source, java]
+----
+public class AdditionQuestion {
+
+    private int a, b;  // The numbers in the problem.
+
+    public AdditionQuestion() { // constructor
+        a = (int)(Math.random() * 50 + 1);
+        b = (int)(Math.random() * 50);
+    }
+
+    public String getQuestion() {
+        return "What is " + a + " + " + b + " ?";
+    }
+
+    public int getCorrectAnswer() {
+        return a + b;
+    }
+
+}
+----
+
+---
+
+* Exercise 5.7:
+
+** Rewrite the program from the previous exercise so that it administers a quiz with several different kinds of questions. In the previous exercise, you used a class to represent addition questions. For this exercise, you will use the following `interface`, or an equivalent abstract class, to represent the more general idea of a question that has an integer as its answer
+
+[source, java]
+----
+public interface IntQuestion {
+    public String getQuestion();
+    public int getCorrectAnswer();
+}
+----
+
+** You can make the AdditionQuestion class implement the interface simply by adding "implements IntQuestion" to its definition. Write a similar class to represent subtraction questions. When creating a subtraction problem, you should make sure that the answer is not negative.
+
+For the new program, use an array of type `IntQuestion[]` to hold the quiz questions. Include some addition questions and some subtraction questions in the quiz. You can also add a couple non-math questions, including this one, created as an anonymous class
+
+[source, java]
+----
+IntQuestion bigQuestion = new IntQuestion() {
+    public String getQuestion() {
+        return "What is the answer to the ultimate question " +
+                 " of life, the universe, and everything?";
+    }
+    public int getCorrectAnswer() {
+        return 42;
+    }
+};
+----

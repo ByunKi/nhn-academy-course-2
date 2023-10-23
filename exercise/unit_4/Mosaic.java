@@ -31,7 +31,8 @@ public class Mosaic extends Application {
         mosaicRows = rows;
         mosaicCols = columns;
         new Thread(
-                () -> launch(Mosaic.class, new String[] { "" + rows, "" + columns, "" + blockWidth, "" + blockHeight }))
+                () -> launch(Mosaic.class, new String[] { "" + rows, "" + columns, "" +
+                        blockWidth, "" + blockHeight }))
                 .start();
         do {
             delay(100);
@@ -143,7 +144,8 @@ public class Mosaic extends Application {
         if (params.size() != 4)
             canvas = new MosaicCanvas();
         else
-            canvas = new MosaicCanvas(Integer.parseInt(params.get(0)), Integer.parseInt(params.get(1)),
+            canvas = new MosaicCanvas(Integer.parseInt(params.get(0)),
+                    Integer.parseInt(params.get(1)),
                     Integer.parseInt(params.get(2)), Integer.parseInt(params.get(3)));
         if (!use3DEffect)
             canvas.setGroutingColor(null);
