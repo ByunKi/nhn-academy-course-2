@@ -1,0 +1,261 @@
+= Quiz on Chapter 7
+
+* Question 1:
+** What is meant by the basetype of an array?
+
+* Array의 기본적인 타입은 자바에서 기본적으로 제공하는 primitive 타입의 값들을 지정된 크기만큼 저장할 수 있는 공간을 의미한다. array는 `[]`의 형태의 타입으로 선언 및 정의할 수 있다.
+
+---
+
+* Question 2:
+** What is the purpose of the following variable-arity method? 
+** What are the values of `same(1,2,3)`, `same(17,17,17,17)`, and `same(2)` Why?
+
+[source, java]
+----
+static double same(int... value ) {
+    for (int i = 1; i < value.length; i++) {
+        if ( value[i-1] != value[i] )
+            return false;
+    }
+    return true;
+}
+----
+
+* 가변 arity 방법을 사용하는 이유는 배열을 선언할 때, 우리는 배열의 크기를 미리 설정 해주어야하는데 arity 방식을 사용하면 이러한 배열의 크기를 사전에 결정하는 것 대신에 parameter로 입력받은 값들을 컴파일러가 배열로 구성해주어 프로그래머의 피로도와 스트레스를 줄여준다.
+
+---
+
+* Question 3:
+** What does it mean to sort an array?
+
+* 배열에 들어있는 요소의 값들을 비교하여 특정한 순서대로(오름차순, 내림차순, String의 경우에는 String의 길이 순 등) 재배치하는 것을 말한다.
+---
+
+* Question 4:
+** What is the main advantage of binary search over linear search? What is the main disadvantage?
+
+* 이분탐색은 선형탐색보다 탐색의 수행시간이 압도적으로 빠르다는 장점이 존재하나, 이분탐색을 하기위해서는 사전에 정렬을 해야하기 때문에 이러한 과정에서 시간적인 장점이 상쇄된다는 단점이 존재한다. 따라서 프로그래머는 선형탐색과 이분탐색에 걸리는 시간을 적절하게 파악하여 각 상황에 맞는 효과적인 탐색방법을 선택 해야한다.
+
+---
+
+* Question 5:
+** What is meant by a `dynamic array`? What is the advantage of a `dynamic array` over a regular array?
+
+* 동적배열은 일반적인 배열과는 다르게 사용자에 요구에 맞추어 배열의 크기를 줄이거나 크기를 증가시킬 수 있다. 그러나 배열의 크기를 줄이거나 늘이는 과정에서 새로운 배열 객체를 생성하고 기존의 내용을 복사해서 옮기는 등의 부가 작업이 추가되면서 프로그램의 속도는 느려질 수 있다.
+
+---
+
+* Question 6:
+** What does it mean to say that `ArrayList` is a parameterized type?
+
+* 다양한 타입의 ArrayList를 사용하기 위해서 ArrayList에 사용할 수 있는 타입을 사용자가 지정할 수 있게 해 놓았다.
+우리는 ArrayList를 사용할 때, T에 있는 위치에 우리가 사용할 클래스 타입을 넣어서 사용할 수 있다.
+
+---
+
+* Question 7:
+** Assume that the list is not empty and that all the items in the list are non-null. 
+** Write a code segment that will find and print the string in the list that comes first in lexicographic order.
+
+[source, java]
+----
+package quiz.unit_7;
+
+import java.util.ArrayList;
+
+public class Quiz7 {
+    public static void main(String[] args) {
+        ArrayList<String> strList = new ArrayList<>();
+        strList.add("Banana");
+        strList.add("Apple");
+        strList.add("Corn");
+
+        strList.stream().sorted().forEach(System.out::println);
+    }
+}
+----
+
+---
+
+* Question 8:
+** Show the exact output produced by the following code segment.
+
+[source, java]
+----
+char[][] pic = new char[6][6];
+for (int i = 0; i < 6; i++)
+   for (int j = 0; j < 6; j++) {
+      if (i == j || i == 0 || i == 5)
+         pic[i][j] = '*';
+      else
+         pic[i][j] = '.';
+   }
+
+for (int i = 0; i < 6; i++) {
+   for (int j = 0; j < 6; j++)
+      System.out.print(pic[i][j]);
+   System.out.println();
+}
+----
+
+   ******
+   .*....
+   ..*...
+   ...*..
+   ....*.
+   ******
+
+---
+
+* Question 9:
+** Write a complete static method that finds the largest value in an array of `ints`. The method should have one parameter, which is an array of type `int[]`.
+** The largest number in the array should be returned as the value of the method.
+
+[source, java]
+----
+package quiz.unit_7;
+
+public class Quiz9 {
+    public static void main(String[] args) {
+        int[] testArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        System.out.println(getMax(testArray));
+    }
+
+    private static int getMax(int[] values) {
+        if (values == null) {
+            return -1;
+        }
+
+        int max = Integer.MIN_VALUE;
+        for (int value : values) {
+            if (value > max) {
+                max = value;
+            }
+        }
+
+        return max;
+    }
+}
+----
+
+---
+
+* Question 10:
+** Suppose that temperature measurements were made on each day of 2021 in each of 100 cities. 
+** where temps[c][d] holds the measurement for city number `c` on the dth day of the year. Write a code segment that will print out the average temperature, over the course of the whole year, for each city. The average temperature for a city can be obtained by adding up all 365 measurements for that city and dividing the answer by 365.0.
+** The measurements have been stored in an array
+
+[source, java]
+----
+int[][] temps = new int[100][365];
+----
+
+[source, java]
+----
+package quiz.unit_7;
+
+public class Quiz10 {
+
+    static int[][] temps = new int[100][365];
+    static int[] result = new int[100];
+
+    public static void main(String[] args) {
+        for (int i = 0; i < temps.length; i++) {
+            for (int j = 0; j < temps[i].length; j++) {
+                temps[i][j] = j + 1;
+            }
+        }
+
+        for (int i = 0; i < temps.length; i++) {
+            for (int j = 0; j < temps[i].length; j++) {
+                result[i] += temps[i][j];
+            }
+        }
+
+        for (int element : result) {
+            System.out.println(element / 365);
+        }
+    }
+}
+----
+
+---
+
+* Question 11:
+** Write a code segment that will output the first name, last name, and hourly wage of each employee who has been with the company for 20 years or more. 
+** Write two versions of the code segment, one that uses a regular for loop, and one that uses a for-each loop.
+
+** Suppose that a class, Employee, is defined as follows:
+
+[source, java]
+----
+class Employee {
+   String lastName;
+   String firstName;
+   double hourlyWage;
+   int yearsWithCompany;
+}
+----
+
+** Suppose that data about 100 employees is already stored in an array:
+
+[source, java]
+----
+Employee[] employeeData = new Employee[100];
+----
+
+[source, java]
+----
+for (int i = 0; i < employeeData.length; i++) {
+   if (employeeData[i].yearsWithCompany >= 20) {
+         System.out.println(employeeData[i]);
+   }
+}
+----
+
+[source, java]
+----
+for (Employee employee : employeeData) {
+   if (employee.yearsWithCompany >= 20) {
+         System.out.println(employee);
+   }
+}
+----
+
+---
+
+* Question 12:
+** Convert the `Employee` class from the previous question into a record class. 
+** What changes would then need to be made to the previous question's solution?
+
+* 레코드 구현 X
+---
+
+* Question 13:
+** Write a record class to represent dates, where a Date object contains three integer fields giving the month, day, and year of the date. 
+** The canonical constructor should throw an exception if the values for the month and day are not legal. Also include a `toString()` method that prints a date in a form such as `5/27/2022`.
+
+* 레코드 구현 X
+---
+
+* Question 14:
+** What is the purpose of the following subroutine? 
+** What is the meaning of the value that it returns, in terms of the value of its parameter?
+
+[source, java]
+----
+static double[] sums( double[][] data ) {
+    double[] answers = new double[ data.length ];
+    for (int i = 0; i < data.length; i++) {
+        double sum = 0;
+        for (int j = 0; j < data[i].length; i++)
+            sum = sum + data[i][j];
+        answers[i] = sum;
+    }
+    return answers;
+}
+----
+
+* 위의 서브루틴은 특정한 2차원 배열의 값의 행들을 전부 더해서 1차원 배열로 반환하는 서브루틴이다. 각 행들의 값들을 전부 더하여 통계적인 계산에서 활용할 수 있을 것이다.
+* 해당 서브루틴은 1차원의 실수 타입을 반환한다. parameter로 전달된 변수의 타입은 더블 2차원 배열이라고 부른다.

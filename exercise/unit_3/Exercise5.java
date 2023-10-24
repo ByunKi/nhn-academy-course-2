@@ -15,7 +15,6 @@ public class Exercise5 {
         double result = 0d;
         List<String> inavailableCites = new ArrayList<>();
 
-        // Maven을 적용한 패키지가 아니라서... (폴더의 이름만 resource 이다.) 인터넷에 나와있는 방법을 사용할 수 없었다.
         try (FileReader reader = new FileReader("./exercise/resources/unit_3/sales_data.txt")) {
             int read = -1;
             char[] buffer = new char[bufferSize];
@@ -31,11 +30,10 @@ public class Exercise5 {
                 String[] information = cityAndSales[i].split(": ");
                 if (information[1].equals("no report received")) {
                     inavailableCites.add(information[0]);
-                    continue;
+                } else {
+                    result += Double.parseDouble(information[1]);
+                    count++;
                 }
-
-                result += Double.parseDouble(information[1]);
-                count++;
             }
 
             System.out.println(count == 0 ? 0 : result / count);
