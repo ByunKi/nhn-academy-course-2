@@ -1,0 +1,128 @@
+= Programming Exercises for Chapter 7
+
+* Exercise 7.1:
+** Write a subroutine that creates an `ArrayList` containing several different random integers in the range from 1 up to some specified maximum. The number of integers and the maximum allowed value for the integers should be parameters to the subroutine. 
+** Write a `main()` routine to test your subroutine.
+
+---
+
+* Exercise 7.2:
+** Suppose that M is a two-dimensional array that has R rows and C columns. The transpose of M is defined to be an array T that has C rows and R columns such that T[i][j] = M[j][i] for each i and j.
+** Write a function that takes an array of type `int[][]` as a parameter, and returns the transpose of that array. 
+** Assume that the parameter is a typical 2D array in which all the rows have the same length. Also write a subroutine to print a 2D array of integers in neat rows and columns, and include a `main()` routine to test your work.
+
+---
+
+* Exercise 7.3:
+** In `Subsection 7.5.4`, it is mentioned that the standard sorting method `Arrays.sort()` is much faster and efficient than selection sort. Write a program to test this claim. To be specific, your program should create a large array filled with random real numbers. It should use both`Arrays.sort()`  and `selectionSort()` to sort the array, and it should time how long it takes to perform each sort. Furthermore, it should do the same thing for a large array of random Strings. 
+** To find the times, you can use `System.nanoTime()` (see `Subsection 2.3.1` and the example `TimedComputation.java`).
+
+---
+
+* Exercise 7.4:
+** In `Exercise 6.2`, you wrote a program `DragTwoSquares` that allows the user to drag a red square and a blue square around on a canvas. Write a much improved version where the user can add squares to a canvas and drag them around.
+** In particular: If the user shift-clicks or right-clicks the canvas, then the user is trying to drag a square; find the square that contains the mouse position, if any, and move it as the user drags the mouse. Other clicks should add squares. You can place the center of the new square at the current mouse position. 
+** To make the picture more visually appealing, give each square a random color, and when you draw the squares, draw a black outline around each square. (My program also gives the square a random alpha value between 0.5 and 1.0).
+** Write a class to represent the data needed for drawing one square, and use an `ArrayList` to store the data for all the squares in the picture. If the user drags a square completely off the canvas, delete it from the list.
+
+---
+
+* Exercise 7.5:
+** Write a program that will read a sequence of positive real numbers entered by the user and will print the same numbers in sorted order from smallest to largest. The user will input a zero to mark the end of the input.
+** Assume that at most 100 positive numbers will be entered. 
+** Do not use any built-in function such as `Arrays.sort()`. Do the sorting yourself.
+
+---
+
+* Exercise 7.6:
+
+** Write a program that will read a text file selected by the user, and will make an alphabetical list of all the different words in that file. All words should be converted to lower case, and duplicates should be eliminated from the list. The list should be written to an output file selected by the user. As discussed in `Subsection 2.4.4`, you can use `TextIO` to read and write files. Use a variable of type `ArrayList<String>` to store the words. 
+** It is not easy to separate a file into words as you are reading it, especially if you want to allow apostrophes in the middle of a word. You can use the following method in your program:
+** Note that this method will return null when the file has been entirely read. You can use this as a signal to stop processing the input file.
+
+[source, java]
+----
+/**
+ * Read the next word from TextIO, if there is one.  First, skip past
+ * any non-letters in the input.  If an end-of-file is encountered before 
+ * a word is found, return null.  Otherwise, read and return the word.
+ * A word is defined as a sequence of letters.  Also, a word can include
+ * an apostrophe if the apostrophe is surrounded by letters on each side.
+ * @return the next word from TextIO, or null if an end-of-file is 
+ *     encountered
+ */
+private static String readNextWord() {
+   char ch = TextIO.peek(); // Look at next character in input.
+   while (ch != TextIO.EOF && ! Character.isLetter(ch)) {
+          // Skip past non-letters.
+      TextIO.getAnyChar();  // Read the character.
+      ch = TextIO.peek();   // Look at the next character.
+   }
+   if (ch == TextIO.EOF) // Encountered end-of-file
+      return null;
+   // At this point, we know the next character is a letter, so read a word.
+   String word = "";  // This will be the word that is read.
+   while (true) {
+      word += TextIO.getAnyChar();  // Append the letter onto word.
+      ch = TextIO.peek();  // Look at next character.
+      if ( ch == '\'' ) {
+            // The next character is an apostrophe.  Read it, and
+            // if the following character is a letter, add both the
+            // apostrophe and the letter onto the word and continue
+            // reading the word.  If the character after the apostrophe
+            // is not a letter, the word is done, so break out of the loop.
+         TextIO.getAnyChar();   // Read the apostrophe.
+         ch = TextIO.peek();    // Look at char that follows apostrophe.
+         if (Character.isLetter(ch)) {
+            word += "\'" + TextIO.getAnyChar();
+            ch = TextIO.peek();  // Look at next char.
+         }
+         else
+            break;
+      }
+      if ( ! Character.isLetter(ch) ) {
+            // If the next character is not a letter, the word is
+            // finished, so break out of the loop.
+         break;
+      }
+      // If we haven't broken out of the loop, next char is a letter.
+   }
+   return word;  // Return the word that has been read.
+}
+----
+
+---
+
+* Exercise 7.7:
+** Your program will be simpler than the Checkers program from `Subsection 7.6.3`. Play alternates strictly between the two players, and there is no need to highlight the legal moves. You will only need one nested subclass, a subclass of Canvas to draw the board and do all the work of the game, like the nested `CheckersBoard class` in the `Checkers program`. You will probably want to look at the source code for the checkers program, `Checkers.java`, for ideas about the general outline of the program.
+
+** The hardest part of the program is checking whether the move that a player makes is a winning move. To do this, you have to look in each of the four possible directions from the square where the user has placed a piece. You have to count how many pieces that player has in a row in that direction. If the number is five or more in any direction, then that player wins. As a hint, here is part of the code from my program. This code counts the number of pieces that the user has in a row in a specified direction. The direction is specified by two integers, `dirX and dirY`. The values of these variables are 0, 1, or -1, and at least one of them is non-zero. For example, to look in the horizontal direction, dirX is 1 and dirY is 0.
+
+[source, java]
+----
+int ct = 1;  // Number of pieces in a row belonging to the player.
+
+int r, c;    // A row and column to be examined
+
+r = row + dirX;  // Look at square in specified direction.
+c = col + dirY;
+while ( r >= 0 && r < 13 && c >= 0 && c < 13 
+                                  && board[r][c] == player ) {
+        // Square is on the board, and it 
+        // contains one of the player's pieces.
+   ct++;
+   r += dirX;  // Go on to next square in this direction.
+   c += dirY;
+}
+
+r = row - dirX;  // Now, look in the opposite direction.
+c = col - dirY;
+while ( r >= 0 && r < 13 && c >= 0 && c < 13 
+                                 && board[r][c] == player ) {
+   ct++;
+   r -= dirX;   // Go on to next square in this direction.
+   c -= dirY;
+}
+----
+
+image:../images/unit_7/exercise_7_7.png[Exercise 7-7]
