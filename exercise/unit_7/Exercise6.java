@@ -19,6 +19,7 @@ public class Exercise6 {
             List<String> datas = rawDatas
                     .stream()
                     .distinct()
+                    .map(String::trim)
                     .map(String::toLowerCase)
                     .collect(Collectors.toList());
 

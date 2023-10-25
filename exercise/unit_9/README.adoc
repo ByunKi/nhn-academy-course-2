@@ -1,0 +1,55 @@
+= Programming Exercises for Chapter 9
+
+* Exercise 9.1:
+** Write recursive functions to compute `factorial(N)` and `fibonacci(N)` for a given non-negative integer N, and write a `main()` routine to test your functions.
+** Consider using the `BigInteger` class
+
+    factorial(0)  =  1
+    factorial(N)  =  N*factorial(N-1)   for N > 0
+
+    fibonacci(0)  =  1
+    fibonacci(1)  =  1
+    fibonacci(N)  =  fibonacci(N-1) + fibonacci(N-2)   for N > 1
+
+---
+
+* Exercise 9.2:
+** Write a new version of the same program that stores the words in a binary sort tree instead of in an arraylist. 
+** You can use the binary sort tree routines from `SortTreeDemo.java`, which was discussed in `Subsection 9.4.2`.
+
+---
+
+* Exercise 9.3:
+** Write a subroutine that will make a copy of a list, with the order of the items of the list reversed. The subroutine should have a parameter of type `ListNode`, and it should return a value of type `ListNode`. The original list should not be modified.
+
+[source, java]
+----
+class ListNode {
+   int item;       // An item in the list.
+   ListNode next;  // Pointer to the next node in the list.
+}
+----
+
+---
+
+* Exercise 9.4:
+**Write a subroutine that implements this algorithm, and write a program to test the subroutine. Note that you will need a queue of `TreeNodes`, so you will need to write a class to represent such queues.
+
+    Add the root node to an empty queue
+    while the queue is not empty:
+    Get a node from the queue
+    Print the item in the node
+    if node.left is not null:
+        add it to the queue
+    if node.right is not null:
+        add it to the queue
+
+---
+
+* Exercise 9.5:
+** ou should create a random binary sort tree with 1023 nodes. The items in the tree can be real numbers, and you can create the tree by generating 1023 random real numbers and inserting them into the tree, using the usual `treeInsert()` method for binary sort trees. Once you have the tree, you should compute and output the average depth of all the leaves in the tree and the maximum depth of all the leaves.
+
+---
+
+* Exercise 9.6:
+* Exercise 9.7:
