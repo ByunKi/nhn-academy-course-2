@@ -40,8 +40,13 @@
     * link:https://github.com/ByunKi/nhn-academy-course-2/blob/main/quiz/Chapter_8.adoc[Unit 8 Quiz]
     * link:https://github.com/ByunKi/nhn-academy-course-2/tree/main/exercise/unit_8[Unit 8 Exercise]
 
-^.^| 2023.10.27, 2023.10.30
+^.^| 2023.10.30
 | 
     * link:https://github.com/ByunKi/nhn-academy-course-2/blob/main/quiz/Chapter_9.adoc[Unit 9 Quiz]
     * link:https://github.com/ByunKi/nhn-academy-course-2/tree/main/exercise/unit_9[Unit 9 Exercise]
+
+^.^| 2023.10.31
+| 
+    * link:https://github.com/ByunKi/nhn-academy-course-2/blob/main/quiz/Chapter_10.adoc[Unit 10 Quiz]
+    * link:https://github.com/ByunKi/nhn-academy-course-2/tree/main/exercise/unit_10[Unit 10 Exercise]
 |===
