@@ -1,0 +1,96 @@
+= Programming Exercises for Chapter 10
+
+* Exercise 10.1:
+** Rewrite the `PhoneDirectory` class from `Subsection 7.5.2` so that it uses a `TreeMap` to store directory entries
+** You should also write a short program to test the class.
+
+---
+
+* Exercise 10.2:
+** Suppose that A and B are variables of type `Set` in Java. The mathematical operations on A and B can be computed using methods from the `Set interface`. In particular: `A.addAll(B)` computes the union of A and B; `A.retainAll(B)` computes the intersection of A and B; and `A.removeAll(B)` computes the difference of A and B. 
+** you should write a program that can be used as a "set calculator" for simple operations on sets of non-negative integers. (Negative integers are not allowed.) For input and output, a set of such integers will be written as a list of integers, separated by commas and, optionally, spaces and enclosed in square brackets. 
+** To represent sets of non-negative integers, use sets of type `TreeSet<Integer>`. Read the user's input, create two TreeSets, and use the appropriate TreeSet method to perform the requested operation on the two sets.
+
+---
+
+* Exercise 10.3:
+** write a hash table in which both the keys and the values are of type String.
+** Write an implementation of hash tables from scratch. Define the following methods: `get(key), put(key,value), remove(key), containsKey(key), and size()`. Remember that every object, obj, has a method `obj.hashCode()` that can be used for computing a hash code for the object, so at least you don't have to define your own hash function.
+** Do not use any of Java's built-in generic types; create your own linked lists using nodes as covered in `Subsection 9.2.2`. However, you are not required to increase the size of the table when it becomes too full.
+** You should also write a short program to test your solution.
+
+---
+
+* Exercise 10.4:
+** Define a class that contains the following generic static methods for working with predicate objects. The name of the class should be `Predicates`, in analogy with the standard class `Collections` that provides various static methods for working with collections. You should not use the `stream API` for this exercise.
+
+[source, java]
+----
+public static <T> void remove(Collection<T> coll, Predicate<T> pred)
+   // Remove every object, obj, from coll for which pred.test(obj) 
+   // is true.  (This does the same thing as coll.removeIf(pred).)
+   
+public static <T> void retain(Collection<T> coll, Predicate<T> pred)
+   // Remove every object, obj, from coll for which
+   // pred.test(obj) is false.  (That is, retain the
+   // objects for which the predicate is true.)
+   
+public static <T> List<T> collect(Collection<T> coll, Predicate<T> pred)
+   // Return a List that contains all the objects, obj,
+   // from the collection, coll, such that pred.test(obj)
+   // is true.
+   
+public static <T> int find(ArrayList<T> list, Predicate<T> pred)
+   // Return the index of the first item in list
+   // for which the predicate is true, if any.
+   // If there is no such item, return -1.
+----
+
+---
+
+* Exercise 10.5:
+** defined here as a record class for convenience. And suppose that `scoreData` is an array of `ScoreInfos` containing information about the scores of students on a test.
+** Use the stream API to do each of the following tasks
+*** print the number of students (without using scoreData.length)
+*** print the average score for all of the students
+*** print the number of students who got an A (score greater than or equal to 90)
+*** use the collect() stream operation to create a List<String> that contains the names of students whose score was less than 70; the names should be in the form first name followed by last name
+*** print the names from the List that was generated in the previous task
+*** print out the students' names and scores, ordered by last name
+*** print out the students' names and scores, ordered by score
+** You can put all of the code in `main()` routine and include `ScoreInfo` as a nested class.
+** Do not use any for loops or other control structures.
+
+[source, java]
+----
+private static ScoreInfo[] scoreData = new ScoreInfo[] {
+        new ScoreInfo("Smith","John",70),
+        new ScoreInfo("Doe","Mary",85),
+        new ScoreInfo("Page","Alice",82),
+        new ScoreInfo("Cooper","Jill",97),
+        new ScoreInfo("Flintstone","Fred",66),
+        new ScoreInfo("Rubble","Barney",80),
+        new ScoreInfo("Smith","Judy",48),
+        new ScoreInfo("Dean","James",90),
+        new ScoreInfo("Russ","Joe",55),
+        new ScoreInfo("Wolfe","Bill",73),
+        new ScoreInfo("Dart","Mary",54),
+        new ScoreInfo("Rogers","Chris",78),
+        new ScoreInfo("Toole","Pat",51),
+        new ScoreInfo("Khan","Omar",93),
+        new ScoreInfo("Smith","Ann",95)
+};
+----
+
+---
+
+* Exercise 10.6:
+** Write a program that can create a concordance. The document should be read from an input file, and the concordance data should be written to an output file.
+** As you read the file, you want to take each word that you encounter and add it to the concordance along with the current line number. Keeping track of the line numbers is one of the trickiest parts of the problem. In an input file, the end of each line in the file is marked by the newline character
+** you will need to detect the end of the file.
+
+---
+
+* Exercise 10.7:
+** Add a symbol to the symbol table to represent each function. The key is the name of the function and the value is an object of type `StandardFunction` that represents the function.
+** the symbol table is a map of type `HashMap<String,Double>`. It's not legal to use a `StandardFunction` as the value in such a map, so you will have to change the type of the map.

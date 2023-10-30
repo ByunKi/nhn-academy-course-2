@@ -1,73 +1,62 @@
 package exercise.unit_9;
 
-import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.Queue;
 
-/**
- * This program demonstrates a few routines for processing binary
- * sort trees. It uses a binary sort tree of strings. The user
- * types in strings. The user's string is converted to lower case, and --
- * if it is not already in the tree -- it is inserted into the tree.
- * Then the number of nodes in the tree and a list of items in the tree
- * are output. The program ends when the user enters an empty string.
- */
-public class SortTreeDemo {
-
-    /**
-     * An object of type TreeNode represents one node in a binary tree of strings.
-     */
+public class Exercise4 {
     private static class TreeNode {
-        String item; // The data in this node.
-        TreeNode left; // Pointer to left subtree.
-        TreeNode right; // Pointer to right subtree.
+        double item;
+        TreeNode left;
+        TreeNode right;
 
-        TreeNode(String str) {
-            // Constructor. Make a node containing the specified string.
-            // Note that left and right pointers are initially null.
-            item = str;
+        TreeNode(double item) {
+            this.item = item;
         }
-    } // end nested class TreeNode
+    }
 
-    private static TreeNode root; // Pointer to the root node in a binary tree.
-                                  // This tree is used in this program as a
-                                  // binary sort tree. When the tree is empty,
-                                  // root is null (as it is initially).
+    private static TreeNode root;
 
     public static void main(String[] args) {
-
-        Scanner in = new Scanner(System.in); // for reading user's input
-
-        System.out.println("This program stores strings that you enter in a binary sort");
-        System.out.println("tree.  After each item is inserted, the contents of the tree");
-        System.out.println("are displayed.  The number of nodes in the tree is also output.");
-        System.out.println("    Any string you enter will be converted to lower case.");
-        System.out.println("Duplicate entries are ignored.");
-
-        while (true) {
-            // Get one string from the user, insert it into the tree,
-            // and print some information about the tree. Exit if the
-            // user enters an empty string. Note that all strings are
-            // converted to lower case.
-            System.out.println("\n\nEnter a string to be inserted, or press return to end.");
-            System.out.print("?  ");
-            String item; // The user's input.
-            item = in.nextLine().trim().toLowerCase();
-            if (item.length() == 0)
-                break;
-            if (treeContains(root, item)) {
-                // Don't insert a second copy of an item that is already
-                // in the tree.
-                System.out.println("\nThat item is already in the tree.");
-            } else {
-                treeInsert(item); // Add user's string to the tree.
-                System.out.println("\nThe tree contains " + countNodes(root) + " items.");
-                System.out.println("\nContents of tree:\n");
-                treeList(root);
+        double[] randoms = makeRandomArray(10);
+        for (double random : randoms) {
+            if (!treeContains(root, random)) {
+                treeInsert(random);
             }
-        } // end while
+        }
 
-        System.out.println("\n\nExiting program.");
+        treeList(root);
+        System.out.println("트리 노드의 수: " + countNodes(root));
+        treeListWithQueue(root);
+    }
 
-    } // end main()
+    public static double[] makeRandomArray(int size) {
+        double[] result = new double[size];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = Math.round(Math.random() * 100 + 1);
+        }
+
+        return result;
+    }
+
+    private static void treeListWithQueue(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            System.out.println(node.item);
+
+            if (node.left != null) {
+                queue.add(node.left);
+            }
+
+            if (node.right != null) {
+                queue.add(node.right);
+            }
+        }
+    }
+
+    /* 문제에서 제공된 소스의 일부 */
 
     /**
      * Add the item to the binary sort tree to which the global variable
@@ -75,7 +64,7 @@ public class SortTreeDemo {
      * this routine because the value of root might change, and a change
      * in the value of a formal parameter does not change the actual parameter.)
      */
-    private static void treeInsert(String newItem) {
+    private static void treeInsert(double newItem) {
         if (root == null) {
             // The tree is empty. Set root to point to a new node containing
             // the new item. This becomes the only node in the tree.
@@ -85,7 +74,7 @@ public class SortTreeDemo {
         TreeNode runner; // Runs down the tree to find a place for newItem.
         runner = root; // Start at the root.
         while (true) {
-            if (newItem.compareTo(runner.item) < 0) {
+            if (newItem < runner.item) {
                 // Since the new item is less than the item in runner,
                 // it belongs in the left subtree of runner. If there
                 // is an open space at runner.left, add a new node there.
@@ -113,14 +102,14 @@ public class SortTreeDemo {
      * Return true if item is one of the items in the binary
      * sort tree to which root points. Return false if not.
      */
-    static boolean treeContains(TreeNode root, String item) {
+    static boolean treeContains(TreeNode root, double item) {
         if (root == null) {
             // Tree is empty, so it certainly doesn't contain item.
             return false;
-        } else if (item.equals(root.item)) {
+        } else if (item == root.item) {
             // Yes, the item has been found in the root node.
             return true;
-        } else if (item.compareTo(root.item) < 0) {
+        } else if (item < root.item) {
             // If the item occurs, it must be in the left subtree.
             return treeContains(root.left, item);
         } else {
@@ -136,7 +125,7 @@ public class SortTreeDemo {
     private static void treeList(TreeNode node) {
         if (node != null) {
             treeList(node.left); // Print items in left subtree.
-            System.out.println("  " + node.item); // Print item in the node.
+            System.out.println(node.item); // Print item in the node.
             treeList(node.right); // Print items in the right subtree.
         }
     } // end treeList()
@@ -160,5 +149,4 @@ public class SortTreeDemo {
             return 1 + leftCount + rightCount;
         }
     } // end countNodes()
-
-} // end class SortTreeDemo
+}
