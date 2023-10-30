@@ -52,4 +52,19 @@ class ListNode {
 ---
 
 * Exercise 9.6:
+** Make a new version of the sample program `SimpleParser3.java` that can work with such expressions. In your program, the `main()` routine can't simply print the value of the expression, since the value of the expression now depends on the value of `x`. Instead, it should print the value of the expression for `x=0, x=1, x=2, and x=3`.
+** The original program will have to be modified in several other ways. Currently, the program uses classes `ConstNode`, `BinOpNode`, and `UnaryMinusNode` to represent nodes in an expression tree. Since expressions can now include x, you will need a new class, VariableNode, to represent an occurrence of `x` in the expression.
+** In the original program, each of the node classes has an instance method, `double value()`, which returns the value of the node. But in your program, the value can depend on x, so you should replace this method with one of the form `double value(double xValue)`, where the parameter xValue is the value of `x`.
+
+---
+
 * Exercise 9.7:
+** you should modify your program from the previous exercise so that it can compute the derivative of an expression. You can do this by adding a derivative-computing method to each of the node classes. First, add another abstract method to the ExpNode class
+** Then implement this method in each of the four subclasses of ExpNode. All the information that you need is in the rules given above. In your main program, instead of printing the stack operations for the original expression, you should print out the stack operations that define the derivative. Note that the formula that you get for the derivative can be much more complicated than it needs to be.
+*** The derivative of a constant is 0.
+*** The derivative of x is 1.
+*** If A is an expression, let dA be the derivative of A. Then the derivative of -A is -dA.
+*** If A and B are expressions, let dA be the derivative of A and let dB be the derivative of B. Then the derivative of A+B is dA+dB.
+*** The derivative of A-B is dA-dB.
+*** The derivative of A*B is A*dB + B*dA.
+*** The derivative of A/B is (B*dA - A*dB) / (B*B).
