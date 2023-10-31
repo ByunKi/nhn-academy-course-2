@@ -3,40 +3,87 @@
 * Question 1:
 ** What is meant by generic programming and what is the alternative?
 
+* 초창기 자바에서의 Generic 프로그래밍은 모든 타입을 Object로 형변환을 통해서 진행하였지만, 이후 C++ 처럼 타입 파라미터를 추가하여 Generic 프로그래밍을 실시할 수 있음.
+
 ---
 
 * Question 2:
 ** Why can't you make an object of type `LinkedList<int>`? What should you do instead?
+
+* Java의 기본 타입은 타입 파라미터에 들어 갈 수 없으며, 이는 초창기의 Generic과 연관되어있다. 초창기의 Generic 프로그램은 객체를 가지고 시행되어 기본타입을 객체로 구현한 Wrapper 클래스를 사용해야한다.
 
 ---
 
 * Question 3:
 ** What is an iterator and why are iterators necessary for generic programming?
 
+* 다양한 타입의 JCF 클래스에 대한 반복을 1개의 클래스로 통합적으로 사용할 수 있게하기 위한 객체이다.
+
 ---
 
 * Question 4:
 ** Suppose that integers is a variable of type Collection<Integer>. Write a code segment that uses an iterator to compute the sum of all the integer values in the collection. Write a second code segment that does the same thing using a for-each loop.
+
+[source, java]
+----
+package quiz.unit_10;
+
+import java.util.Iterator;
+
+public class Quiz4 {
+    public static void main(String[] args) {
+        int result = 0;
+        Iterator<Integer> iterator = coll.iterator();
+        while (iterator.hasNext()) {
+            result += iterator.next();
+        }
+        System.out.println(result);
+    }
+}
+----
+
+[source, java]
+----
+package quiz.unit_10;
+
+public class Quiz4 {
+    public static void main(String[] args) {
+        int result = 0;
+        for (int value : coll) {
+            result += value;
+        }
+
+        System.out.println(result);
+    }
+}
+----
 
 ---
 
 * Question 5:
 ** Interfaces such as List, Set, and Map define abstract data types. Explain what this means.
 
+* Java에서 인터페이스로 특정한 타입이 가져야하는 연산들을 규정하고 이러한 연산들이 구현되어있다면 1개의 타입으로 생각하여, 지정된 연산이 어떻게 구현되는지는 중요하지 않다.
+
 ---
 
 * Question 6:
 ** What is the fundamental property that distinguishes Sets from other types of Collections?
 
+* Set 또한 Collection에 포함되지만, 다른 Collection과의 차이점은 Set은 중복과 순서를 허용하지 않는다는 점에서 차이가 존재한다. 따라서 Comparable, Comparator 등의 인터페이스를 구현하는데 있어 차이가 존재한다.
 ---
 
 * Question 7:
 ** What is the essential difference in functionality between a TreeMap and a HashMap?
 
+* TreeMap에는 값이 입력되면서 오름차순으로 기본 정렬되고, HashMap은 순서를 고려하지 않고 요소를 삽입힌다. 그러나 요소들의 값을 비교하기 위해서는 Comparable 인터페이스를 구현해야 한다.
+
 ---
 
 * Question 8:
 ** Explain what is meant by a hash code.
+
+* 개체의 해시 코드는 해당 개체가 해시 테이블에 저장되어야 하는 위치를 알려주는 정수입니다. 해시 테이블은 연결된 목록의 배열입니다. 객체가 해시 테이블에 저장되면 이러한 연결 목록 중 하나에 추가됩니다.
 
 ---
 
@@ -49,10 +96,37 @@ class Date {
    int month;  // Month number in range 1 to 12.
    int day;    // Day number in range 1 to 31.
    int year;   // Year number.
+
    Date(int m, int d, int y) { 
       month = m;
       day = d;
       year = y;
+   }
+}
+----
+
+[source, java]
+----
+class Date implements Comparable<Date> {
+   int month;  // Month number in range 1 to 12.
+   int day;    // Day number in range 1 to 31.
+   int year;   // Year number.
+
+   Date(int m, int d, int y) { 
+      month = m;
+      day = d;
+      year = y;
+   }
+
+   @Override
+   int compareTo(other Date) {
+      if (other.year == this.year) {
+         if (other.month == this.month) {
+            return other.day - this.day;            
+         }
+         return other.month - this.month;
+      }
+      return other.year - this.year;
    }
 }
 ----
@@ -62,15 +136,67 @@ class Date {
 * Question 10:
 ** Suppose that syllabus is a variable of type TreeMap<Date,String>, where Date is the class from the preceding exercise. Write a code segment that will write out the value string for every key that is in the month of December, 2021.
 
+[source, java]
+----
+public static void main(String[] args) {
+   for (int i = 1; i <= 31; i++) {
+      Date date = new Date(12, i, 2021);
+      String info = map.get(date);
+
+      if (info != null) {
+            System.out.println(info);
+      }
+   }
+}
+----
+
 ---
 
 * Question 11:
 ** Write a generic class Stack<T> that can be used to represent stacks of objects of type T. The class should include methods push(), pop(), and isEmpty(). Inside the class, use an ArrayList to hold the items on the stack.
 
+[source, java]
+----
+public class Stack<T> {
+   ArrayList<T> stack = new ArrayList<T>();
+   public void push( T newItem ) {
+      stack.add(newItem);
+   }  
+   public T pop() {
+      if ( isEmpty() ) {
+          throw new IllegalStateException("Can't pop from an empty stack");
+      }
+      int top = stack.size() - 1;  // location of top item
+      return stack.remove(top);    // remove and return top item
+   }
+   public boolean isEmpty() {
+      return stack.size() == 0;
+   }
+}
+----
+
 ---
 
 * Question 12:
 ** Write a generic method, using a generic type parameter <T>, that replaces every occurrence in an ArrayList<T> of a specified item with a specified replacement item. The list and the two items are parameters to the method. Both items are of type T. Take into account the fact that the item that is being replaced might be null. For a non-null item, use equals() to do the comparison.
+
+[source, java]
+----
+public static <T> void replaceAll(List<T> list, T oldItem, T newItem) {
+   ListIterator<T> iter = list.listIterator();
+   while (iter.hasNext()) {
+      T listItem = iter.next();
+      if ( oldItem == null ) {
+         if ( listItem == null )
+            iter.set(newItem);
+      }
+      else {
+         if ( oldItem.equals(listItem) )
+            iter.set(newItem);
+      }
+   }
+}
+----
 
 ---
 
@@ -86,12 +212,39 @@ long n = Arrays.stream(words)
                .count();
 ----
 
+
+* 이 코드는 대소문자를 무시하고 배열에 있는 다양한 문자열의 수를 계산합니다. 배열의 모든 문자열을 포함하는 스트림으로 시작합니다. filter () 작업은 null이 아닌 값만 허용합니다. 이렇게 하면 w.toLowerCase()가 평가될 때 다음 단계에서 NullPointerExcetion이 발생하지 않게 됩니다 . map ()은 스트림의 각 문자열을 소문자 버전으로 대체하므로 동일한 문자열의 대문자 버전과 소문자 버전 간에 차이가 없습니다. Distinct()는 스트림에서 중복을 제거합니다. 그리고 count()는 결과의 문자열 수를 반환합니다. 스트림에는 이제 배열에서 발생하는 모든 문자열의 소문자 복사본이 하나만 포함됩니다.
+
 ---
 
 * Question 14:
 ** Use the stream API to print all the even integers from 2 to 20. Start with IntStream.range and apply a filter operation.
 
+[source, java]
+----
+public static void main(String[] args) {
+   IntStream.range(2, 20)
+            .filter(value -> value % 2 == 0)
+            .forEach(System.out::println);
+}
+----
+
 ---
 
 * Question 15:
 ** Write a generic method countIf(c,t) with type parameter <T>, where the first parameter, c, is of type Collection<T>, and the second parameter, p, is of type Predicate<T>. The method should return the number of items in the collection for which the predicate is true. Give two versions, one using a loop and the other using the stream API.
+
+[source, java]
+----
+private static <T> long countIf(Collection<T> collection, Predicate<T> predicate) {
+   long count = 0;
+   Iterator<T> iterator = collection.iterator();
+   while (iterator.hasNext()) {
+      if (predicate.test(iterator.next())) {
+            count = Math.addExact(count, 1L);
+      }
+   }
+
+   return count;
+}
+----
