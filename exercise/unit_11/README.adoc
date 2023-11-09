@@ -70,3 +70,4 @@ else
    message.setText("Game loaded -- it's BLACK's move.");
 drawBoard();
 ----
+
