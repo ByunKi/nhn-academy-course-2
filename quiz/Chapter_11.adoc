@@ -1,14 +1,65 @@
 = Quiz on Chapter 11
 
 * Question 1
+** In Java, input/output is done using I/O streams. I/O streams are an abstraction. Explain what this means and why it is important.
+
+---
+
 * Question 2
+** Java has two types of I/O stream: character streams and byte streams. Why? What is the difference between the two types of streams?
+
+---
+
 * Question 3
+** What is a file? Why are files necessary?
+
+---
+
 * Question 4
+** What is the point of the following statement?
+** Why would you need a statement that involves two different stream classes, PrintWriter and FileWriter?
+
+[source, java]
+----
+out = new PrintWriter( new FileWriter("data.dat") );
+----
+
+---
+
 * Question 5
+** The package `java.io` includes a class named URL. What does an object of type URL represent, and how is it used?
+
+---
+
 * Question 6
+** What is the purpose of the `FileChooser` class?
+
+---
+
 * Question 7
+** Explain what is meant by the `client / server` model of network communication.
+
+---
+
 * Question 8
+** What is a `socket`?
+
+---
+
 * Question 9
+** What is a `ServerSocket` and how is it used?
+
+---
+
 * Question 10
+** What is meant by an element in an `XML document`?
+
+---
+
 * Question 11
+** What is it about `XML` that makes it suitable for representing almost any type of data?
+
+---
+
 * Question 12
+** Write a complete program that will display the first ten lines from a text file. The lines should be written to standard output, `System.out`. The file name is given as the command-line argument `args[0]`. You can assume that the file contains at least ten lines. Don't bother to make the program robust. Do not use `TextIO` to process the file; read from the file using methods covered in this chapter.
