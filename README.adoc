@@ -54,4 +54,9 @@
 | 
     * link:https://github.com/ByunKi/nhn-academy-course-2/blob/main/quiz/Chapter_11.adoc[Unit 11 Quiz]
     * link:https://github.com/ByunKi/nhn-academy-course-2/tree/main/exercise/unit_11[Unit 11 Exercise]
+
+^.^| 2023.11.09
+| 
+    * link:https://github.com/ByunKi/nhn-academy-course-2/blob/main/quiz/Chapter_12.adoc[Unit 12 Quiz]
+    * link:https://github.com/ByunKi/nhn-academy-course-2/tree/main/exercise/unit_12[Unit 12 Exercise]
 |===
