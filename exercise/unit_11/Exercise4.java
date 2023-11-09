@@ -109,8 +109,7 @@ public class Exercise4 {
                 }
             }
         } catch (Exception e) {
-            System.out.println(
-                    "Sorry, an error occurred while reading data from the server.");
+            System.out.println("Sorry, an error occurred while reading data from the server.");
             System.out.println("Error: " + e);
         } finally {
             try {
